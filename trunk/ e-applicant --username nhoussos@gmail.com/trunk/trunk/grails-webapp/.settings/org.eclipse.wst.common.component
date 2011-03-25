@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="grails">
+        <wb-resource deploy-path="/" source-path="/acegi-0.5.3.2-grails-app-conf"/>
+        <wb-resource deploy-path="/" source-path="/acegi-0.5.3.2-grails-app-controllers"/>
+        <wb-resource deploy-path="/" source-path="/acegi-0.5.3.2-grails-app-services"/>
+        <wb-resource deploy-path="/" source-path="/acegi-0.5.3.2-grails-app-taglib"/>
+        <wb-resource deploy-path="/" source-path="/acegi-0.5.3.2-src-java"/>
+        <wb-resource deploy-path="/" source-path="/acegi-0.5.3.2-src-groovy"/>
+        <wb-resource deploy-path="/" source-path="/jetty-1.2-SNAPSHOT-src-groovy"/>
+    </wb-module>
+</project-modules>
