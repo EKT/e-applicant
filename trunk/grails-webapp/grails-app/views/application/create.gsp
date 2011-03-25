@@ -1,5 +1,3 @@
-
-
 <%@ page import="gr.ekt.applicanttracker.Application" %>
 <%@ page import="gr.ekt.applicanttracker.Project" %>
 
