@@ -30,6 +30,8 @@ class Invitation {
 
 /**
  * @assoc 1 - 1 Results 
+ * @assoc 1..* Required 1..* Skill
+ * @assoc 1..* Desired 0..* Skill
  */
 class Project {
 	String code;
@@ -54,8 +56,7 @@ class ApplicationForm {
  * @assoc 1..* - 1 Project  
  * @assoc 1 CommitteeEvaluation 1 CommitteeApplicationEvaluation
  * @assoc 1 ReviewerEvaluations 0..* ReviewerApplicationEvaluation
- * @assoc 1..* Required 1..* Skill
- * @assoc 1..* Desired 0..* Skill
+ * @assoc 0..* - 1..* Skill
  */
 class Application {
 }
