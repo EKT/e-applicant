@@ -1,5 +1,6 @@
-import org.codehaus.groovy.grails.plugins.springsecurity.RedirectUtils
-import org.grails.plugins.springsecurity.service.AuthenticateService
+package gr.ekt.applicanttracker
+//import org.codehaus.groovy.grails.plugins.springsecurity.RedirectUtils
+//import org.grails.plugins.springsecurity.service.AuthenticateService
 
 import org.springframework.security.AuthenticationTrustResolverImpl
 import org.springframework.security.DisabledException
@@ -61,7 +62,7 @@ class LoginController {
 			view = 'facebookAuth'
 			postUrl = "${request.contextPath}${config.facebook.filterProcessesUrl}"
 		}
-		else {
+		else {http://loc
 			view = 'auth'
 			postUrl = "${request.contextPath}${config.filterProcessesUrl}"
 		}

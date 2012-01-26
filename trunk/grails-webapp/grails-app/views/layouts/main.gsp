@@ -11,6 +11,7 @@
         <g:javascript library="selectlist" />
         <g:javascript library="md5" />
         <g:javascript library="jcap" />
+        <g:javascript library="prototype" />
     </head>
     <body>
     	<div style="padding: 10px">

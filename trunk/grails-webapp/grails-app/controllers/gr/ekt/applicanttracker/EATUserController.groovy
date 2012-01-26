@@ -1,3 +1,4 @@
+package gr.ekt.applicanttracker
 class EATUserController {
 
 	def authenticateService

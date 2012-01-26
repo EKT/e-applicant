@@ -1,3 +1,4 @@
+package gr.ekt.applicanttracker
 /**
  * Logout Controller (Example).
  */

@@ -1,4 +1,4 @@
-
+﻿
 
 <%@ page import="gr.ekt.applicanttracker.Skill" %>
 <html>

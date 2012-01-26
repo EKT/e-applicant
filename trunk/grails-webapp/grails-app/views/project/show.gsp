@@ -1,4 +1,4 @@
-
+﻿
 <%@ page import="gr.ekt.applicanttracker.Project" %>
 <html>
     <head>
@@ -86,7 +86,7 @@
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
                                 <g:each in="${projectInstance.skills}" var="p">
-                                    <li><g:link controller="skill" action="show" id="${p.id}">${p.title}</g:link></li>
+                                    <li><g:link controller="skill" action="show" id="${p?.id}">${p?.title}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>
@@ -99,7 +99,7 @@
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
                                 <g:each in="${projectInstance.wishSkills}" var="p">
-                                    <li><g:link controller="skill" action="show" id="${p.id}">${p.title}</g:link></li>
+                                    <li><g:link controller="skill" action="show" id="${p?.id}">${p?.title}</g:link></li>
                                 </g:each>
                                 </ul>
                             </td>
