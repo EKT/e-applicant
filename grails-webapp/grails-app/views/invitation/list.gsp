@@ -69,7 +69,7 @@
                             
                         	<td><g:link title="Δείτε τα έργα" action="list" controller="project" params="['invitation.id': invitationInstance?.id]">${invitationInstance.projects.size()}</g:link> <g:link style="font-size:10px" title="Δημιουργία νέου έργου" action="create" controller="project" params="['invitation.id': invitationInstance?.id]">(Δημιουργία νέου έργου)</g:link></td>
                         
-                        	<td><g:link title="Φόρμα δημιουργίας νέας αίτησης για την πρόσκληση" action="create" controller="application" params="[invid:invitationInstance?.id]">Φόρμα εισαγωγής αίτησης</g:link></td>
+                        	<td><g:link title="Φόρμα δημιουργίας νέας αίτησης για την πρόσκληση" action="create" controller="candidate" params="[invitationid:invitationInstance?.id]">Φόρμα εισαγωγής αίτησης</g:link></td>
                         
                         	<td> 
                         		<g:link title="Προβολή" action="show" id="${invitationInstance.id}" method="POST"><img src="${request.getContextPath()}/images/show_icon.png"></g:link>

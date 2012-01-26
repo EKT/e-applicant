@@ -17,6 +17,9 @@
 	<bean id="excelExporterService" class="gr.ekt.applicanttracker.ExcelExporterService">
 	</bean>
 	
+	<bean id="migrationService" class="gr.ekt.applicanttracker.MigrationService">
+	</bean>
+	
 	<bean id="mailSession" class="javax.mail.Session" factory-method="getInstance">
 		<constructor-arg>
 			<props>

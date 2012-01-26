@@ -18,6 +18,20 @@
              
              <br/><br/>
              
+             <g:form action="list">
+             <g:select
+        				optionKey="id" 
+        				optionValue="code" 
+						id="invitation-select"
+        				from="${gr.ekt.applicanttracker.Invitation.list()}" 
+        				name="selectedInvitation" 
+        				value="${selectedInvitation }"
+        				noSelection="['all':'-- Όλες οι προσκλήσεις --']"
+    				></g:select>
+    				<g:submitButton name="Ανανέωση αποτελεσμάτων" style="width:200px"/>
+    				<br/><br/>
+             </g:form>
+             
             <g:if test="${flash.message}">
             <div class="message">${flash.message}</div>
             </g:if>
@@ -30,6 +44,8 @@
                         
                             <g:sortableColumn property="code" title="${message(code: 'project.code.label', default: 'Κωδικός έργου')}" />
                             
+                            <th><g:message code="project.invitation.label" default="Πρόσκληση" /></th>
+                            
                             <g:sortableColumn property="code" title="${message(code: 'project.title.label', default: 'Τίτλος')}" />
                             <g:sortableColumn property="code" title="${message(code: 'project.duration.label', default: 'Διάρκεια')}" />
                             <g:sortableColumn property="code" title="${message(code: 'project.noOfJobs.label', default: 'Αρ. Θέσεων')}" />
@@ -38,7 +54,7 @@
                         
                             <g:sortableColumn property="description" title="${message(code: 'project.description.label', default: 'Περιγραφή')}" />
                         
-                            <th><g:message code="project.invitation.label" default="Πρόσκληση" /></th>
+                            
                         
                         </tr>
                     </thead>
@@ -50,6 +66,8 @@
                         
                         	<td><g:link action="show" id="${projectInstance.id}">${fieldValue(bean: projectInstance, field: "code")}</g:link></td>
                         
+                        	<td>${projectInstance.invitation?.code}</td>
+                        
                         	<td><div style="width:300px">${fieldValue(bean: projectInstance, field: "title")}</div></td>
                         	
                         	<td><center>${fieldValue(bean: projectInstance, field: "duration")}</center></td>
@@ -60,7 +78,7 @@
                         
                             <td>${fieldValue(bean: projectInstance, field: "description")}</td>
                         
-                            <td>${projectInstance.invitation?.code}</td>
+                            
                         
                         </tr>
                     </g:each>
@@ -69,13 +87,7 @@
             </div>
 
             <div class="paginateButtons">
-                <g:paginate total="${projectInstanceTotal}" max="30" next="Επόμενη" prev="Προηγούμενη"/> 
-                <div style="padding-top: 20px"></div>
-                <g:form action="list" method="get"> 
-                	Εγγραφές ανά σελίδα&nbsp
-               		<input type="text" name="max" value="<%= params.get("max") %>" style="width:30px"/>
-               		<input type="submit" value="ΟΚ" style="width:30px"></input> 
-               	</g:form> 
+                <g:paginate total="${projectInstanceTotal}" max="100" next="Επόμενη" prev="Προηγούμενη"/> 
             </div>
         </div>
     </body>

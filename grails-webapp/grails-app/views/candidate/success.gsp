@@ -22,97 +22,98 @@
             <div class="message">${flash.message}</div>
             </g:if> -->
             <div class="dialog">
+            
                 <table>
                     <tbody>
-                    
-                    	<tr class="prop">
-                            <td valign="top" class="name"><g:message code="application.invitation.label" default="Πρόσκληση" /></td>
+                        
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.id.label" default="Πρόσκληση" /></td>
                             
-                            <td valign="top" class="value">${applicationInstance.invitation?.code}</td>
+                            <td valign="top" class="value"><strong>${candidateInstance.currentApplicationForm.appFormApplications[0].project.invitation.code}</strong></td>
                             
                         </tr>
                         
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.id.label" default="Kωδικός αίτησης" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "id")}</td>
+                            <td valign="top" class="value"><strong>${candidateInstance.currentApplicationForm.id}</strong></td>
                             
                         </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.firstname.label" default="Όνομα" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "firstname")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "firstname")}</strong></td>
                             
                         </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.lastname.label" default="Επίθετο" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "lastname")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "lastname")}</strong></td>
                             
                         </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.email.label" default="Email" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "email")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "email")}</strong></td>
                             
                         </tr>
                     
                    	 	<tr class="prop">
                             <td valign="top" class="name"><g:message code="application.street.label" default="Οδός" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "street")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "street")}</strong></td>
                             
                         </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.streetno.label" default="Αριθμός" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "streetno")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "streetno")}</strong></td>
                             
                         </tr>
                         
                          <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.postalcode.label" default="Ταχυδρομικός Κώδικας" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "postalcode")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "postalcode")}</strong></td>
                             
                         </tr>
                         
                          <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.city.label" default="Πόλη" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "city")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "city")}</strong></td>
                             
                         </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.country.label" default="Χώρα" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "country")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "country")}</strong></td>
                             
                         </tr>
   
                           <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.phone.label" default="Τηλέφωνο" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "phone")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "phone")}</strong></td>
                             
                         </tr>
                     
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.yearOfBirth.label" default="Έτος Γέννησης" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "yearOfBirth")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "yearOfBirth")}</strong></td>
                             
                         </tr>
                              
                         <tr class="prop">
                             <td valign="top" class="name"><g:message code="application.website.label" default="Website" /></td>
                             
-                            <td valign="top" class="value">${fieldValue(bean: applicationInstance, field: "website")}</td>
+                            <td valign="top" class="value"><strong>${fieldValue(bean: candidateInstance, field: "website")}</strong></td>
                             
                         </tr>
                                          
@@ -121,23 +122,51 @@
                             
                             <td valign="top" style="text-align: left;" class="value">
                                 <ul>
-                                <g:each in="${applicationInstance.projects}" var="p">
-                                    <li>${p.code}<!--  <g:link controller="project" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link>--></li>
+                                <g:each in="${candidateInstance.currentApplicationForm.appFormApplications}" var="p">
+                                    <li><strong>${p.project.code}</strong></li>
                                 </g:each>
                                 </ul>
                             </td>
                             
                         </tr>
+                        </tbody>
+                </table>
+                <br/><br/>
+               <div style="width:705px;"> Μέχρι τη λήξη της προθεσμίας υποβολής αιτήσεων έχετε τη δυνατότητα να δείτε και να διορθώσετε / επεξεργαστείτε τα στοιχεία της αίτησής σας μετά από σύνδεση στο σύστημα με προσωπικό κωδικό.</div>
+                <br/><br/>
+				Τα στοιχεία σύνδεσης στην υπηρεσία είναι:<br /><br />
+                <table>
+                    <tbody>
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.website.label" default="Website" /></td>
+                            
+                            <td valign="top" class="value"><a href="http://tenders-forms.ekt.gr/tenders/candidate/profile">http://tenders-forms.ekt.gr/tenders/candidate/profile</a></td>
+                            
+                        </tr>
+                        
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.website.label" default="Συνθηματικό Χρήστη" /></td>
+                            
+                            <td valign="top" class="value"><strong>${candidateInstance.user.username}</strong></td>
+                            
+                        </tr>
+                        <tr class="prop">
+                            <td valign="top" class="name"><g:message code="application.website.label" default="Κωδικός Χρήστη" /></td>
+                            
+                            <td valign="top" class="value"><strong>${password}</strong></td>
+                            
+                        </tr>
                     </tbody>
                 </table>
+                <br/><br/>
+                <div style="width:705px;">Για οποιοδήποτε ζήτημα σχετικά με την υποβολή αιτήσεων μέσω του συστήματος μπορείτε να επικοινωνείτε μέσω ηλεκτρονικού ταχυδρομείου στην παρακάτω διεύθυνση:</div>
+				<br/><br/>
+				<div style="width:705px; padding-left: 20px"><a href="mailto:epsetkd_tenders@ekt.gr">epsetkd_tenders@ekt.gr</a></div>
+			
+				<br /><br/>
+				Ευχαριστούμε θερμά για την αίτησή σας!<br /><br/>
+		
             </div>
-            <!--<div class="buttons">
-                <g:form>
-                    <g:hiddenField name="id" value="${applicationInstance?.id}" />
-                    <span class="button"><g:actionSubmit class="edit" action="edit" value="${message(code: 'default.button.edit.label', default: 'Edit')}" /></span>
-                    <span class="button"><g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" /></span>
-                </g:form>
-            </div>-->
         </div>
     </body>
 </html>

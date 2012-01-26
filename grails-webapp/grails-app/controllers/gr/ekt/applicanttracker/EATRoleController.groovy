@@ -1,3 +1,4 @@
+package gr.ekt.applicanttracker
 class EATRoleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

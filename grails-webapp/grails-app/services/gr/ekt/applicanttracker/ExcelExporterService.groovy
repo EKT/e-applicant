@@ -1,22 +1,3 @@
-*/
-* Copyright 2011 Hellenic National Documentation Centre (EKT) www.ekt.gr
-*
-* Contributors:
-* Kostas Stamatis, Nikos Houssos
-*
-* Licensed under the EUPL, Version 1.1 or – as soon they will be approved by the European Commission 
-* - subsequent  versions of the EUPL (the "Licence"); 
-* You may not use this work except in compliance with the Licence. 
-* You may obtain a copy of the Licence at: 
-*
-* http://ec.europa.eu/idabc/eupl
-*
-* Unless required by applicable law or agreed to in writing, software distributed 
-* under the Licence is distributed on an "AS IS" basis, 
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
-* See the Licence for the specific language governing permissions and limitations under the Licence. 
-*/
-
 package gr.ekt.applicanttracker
 
 import jxl.Workbook;
@@ -32,7 +13,7 @@ class ExcelExporterService {
 	
 	static transactional = true
 	
-	String exportListInExcel(applicationList, pathToSave, skills, wishSkills) {
+	String exportListInExcel(applicationFormList, pathToSave, skills, wishSkills, selectedProject) {
 		
 		WorkbookSettings ws = new WorkbookSettings();
 		ws.setLocale(new Locale("en", "EN"));
@@ -45,17 +26,12 @@ class ExcelExporterService {
 			e.printStackTrace();
 		}
 		
-		String sheetName = "applications"
+		String sheetName = "application forms"
 		
-		if (applicationList.size() > 0){
-			String projects = ""
-			applicationList.getAt(0).projects.each {
-				if (it?.code)
-					projects += it?.code + "\n"
-			}
+		if (applicationFormList.size() > 0){
 			
 			if (skills.size()>0)
-				sheetName = projects
+				sheetName = selectedProject
 		}
 		
 		WritableSheet s1 =  workbook.createSheet(sheetName, 0);
@@ -66,19 +42,20 @@ class ExcelExporterService {
 		//s1.setColumnView(3, 25)
 		s1.setColumnView(3, 17)
 		s1.setColumnView(4, 20)
-		//s1.setColumnView(6, 14)
-		//s1.setColumnView(7, 21)
-		//s1.setColumnView(8, 23)
-		//s1.setColumnView(9, 17)
-		s1.setColumnView(5, 10)
-		s1.setColumnView(6, 10)
+		s1.setColumnView(5, 20)
+		s1.setColumnView(6, 20)
+		s1.setColumnView(7, 20)
+		s1.setColumnView(8, 20)
+		s1.setColumnView(9, 20)
+		s1.setColumnView(10, 10)
+		s1.setColumnView(11, 10)
 		
 		skills.eachWithIndex { obj, i -> 
-			s1.setColumnView(7+i, 25)
+			s1.setColumnView(12+i, 25)
 		}
 		
 		wishSkills.eachWithIndex { obj, i ->
-			s1.setColumnView(7 + skills.size() + i, 25)
+			s1.setColumnView(12 + skills.size() + i, 25)
 		}
 		
 		//Write header
@@ -99,6 +76,16 @@ class ExcelExporterService {
 		s1.addCell(birthHeaderLabel)
 		Label cityHeaderLabel = new Label(4, 0, "Πόλη", headerCellFormat)
 		s1.addCell(cityHeaderLabel)
+		Label epipedoHeaderLabel = new Label(5, 0, "Επίπεδο Εκπαίδευσης", headerCellFormat)
+		s1.addCell(epipedoHeaderLabel)
+		Label axsiologisiHeaderLabel = new Label(6, 0, "Αξιολόγηση Υποψηφίου", headerCellFormat)
+		s1.addCell(axsiologisiHeaderLabel)
+		Label axsiologisiNotesHeaderLabel = new Label(7, 0, "Σημειώσεις Αξιολόγησης Υπ.", headerCellFormat)
+		s1.addCell(axsiologisiNotesHeaderLabel)
+		Label axsiologisi2HeaderLabel = new Label(8, 0, "Αξιολόγηση Αίτησης", headerCellFormat)
+		s1.addCell(axsiologisi2HeaderLabel)
+		Label axsiologisi2NotesHeaderLabel = new Label(9, 0, "Σημειώσεις Αξιολόγησης Αιτ.", headerCellFormat)
+		s1.addCell(axsiologisi2NotesHeaderLabel)
 		//Label countryHeaderLabel = new Label(6, 0, "Χώρα", headerCellFormat)
 		//s1.addCell(countryHeaderLabel)
 		//Label issuedHeaderLabel = new Label(7, 0, "Ημ. Εγγραφής", headerCellFormat)
@@ -107,86 +94,108 @@ class ExcelExporterService {
 		//s1.addCell(invitationHeaderLabel)
 		//Label projectHeaderLabel = new Label(9, 0, "Έργα", headerCellFormat)
 		//s1.addCell(projectHeaderLabel)
-		Label bioStatusHeaderLabel = new Label(5, 0, "Κατάσταση αρχείου Βιογραφικού", headerCellFormat)
+		Label bioStatusHeaderLabel = new Label(10, 0, "Κατάσταση αρχείου Βιογραφικού", headerCellFormat)
 		s1.addCell(bioStatusHeaderLabel)
-		Label apPFormStatusHeaderLabel = new Label(6, 0, "Κατάσταση αρχείου Υπ. Δήλωσης", headerCellFormat)
+		Label apPFormStatusHeaderLabel = new Label(11, 0, "Κατάσταση αρχείου Υπ. Δήλωσης", headerCellFormat)
 		s1.addCell(apPFormStatusHeaderLabel)
 		
 		skills.eachWithIndex { obj, i ->
-			Label skillHeaderLabel = new Label(7+i, 0, obj.title, headerCellFormat)
+			Label skillHeaderLabel = new Label(12+i, 0, obj.title, headerCellFormat)
 			s1.addCell(skillHeaderLabel)
 		}
 		
 		wishSkills.eachWithIndex { obj, i ->
-			Label skillHeaderLabel = new Label(7 + skills.size() + i, 0, obj.title, headerCellFormat2)
+			Label skillHeaderLabel = new Label(12 + skills.size() + i, 0, obj.title, headerCellFormat2)
 			s1.addCell(skillHeaderLabel)
 		}
 		
 		int row = 2;
 		
-		for (Application application : applicationList){
-			Label idLabel = new Label(0, row, String.valueOf(application.id))
-			Label firstnameLabel = new Label(1, row, getUnstressed(application.firstname))
-			Label lastnameLabel = new Label(2, row, getUnstressed(application.lastname))
-			//Label emailLabel = new Label(3, row, application.email)
+		for (ApplicationForm applicationForm : applicationFormList){
+			Label idLabel = new Label(0, row, String.valueOf(applicationForm.id))
+			Label firstnameLabel = new Label(1, row, getUnstressed(applicationForm.appFormCandidate.firstname))
+			Label lastnameLabel = new Label(2, row, getUnstressed(applicationForm.appFormCandidate.lastname))
+			
 			Label birthLabel = new Label(3, row, "")
-			if (application.yearOfBirth != null){
-				birthLabel = new Label(3, row, application.yearOfBirth)
+			if (applicationForm.appFormCandidate.yearOfBirth != null){
+				birthLabel = new Label(3, row, applicationForm.appFormCandidate.yearOfBirth)
 			}
 			
-			Label cityLabel = new Label(4, row, getUnstressed(application.city))
-			//Label countryLabel = new Label(6, row, application.country)
+			Label cityLabel = new Label(4, row, getUnstressed(applicationForm.appFormCandidate.city))
 			
-			//Label dateIssuedLabel = new Label(7, row, application.dateIssued.toString())
-			//Label invitationLabel = new Label(8, row, application.invitation.code)
-			
-			//String projects = ""
-			//application.projects.each { 
-			//	if (it?.code)
-			//		projects += it?.code + "\n"	
-			//}
-			//Label projectsLabel = new Label(9, row, projects)
-			
-			String bioStatus = application.bioFileCheckStatus?.toString()
+			String bioStatus = applicationForm.bioFileCheckStatus?.toString()
 			if ("".equals(bioStatus) || bioStatus==null)
 				bioStatus = "Δεν έχει ελεγχθεί"
-			String appFormStatus = application.appFormFileCheckStatus?.toString()
+			String appFormStatus = applicationForm.appFormFileCheckStatus?.toString()
 			if ("".equals(appFormStatus) || appFormStatus==null)
 				appFormStatus = "Δεν έχει ελεγχθεί"
-			Label bioStatusLabel = new Label(5, row, bioStatus)
-			Label appFormStatusLabel = new Label(6, row, appFormStatus)
+			
+			String epipedoFormStatus = applicationForm.appFormCandidate?.educationalLevel?.toString()
+			if ("".equals(epipedoFormStatus) || epipedoFormStatus==null)
+				epipedoFormStatus = "Δεν έχει συμπληρωθεί"
+			
+			String axsiologisiFormStatus = applicationForm.appFormCandidate?.candidateEvaluation?.candidateEvalLevel?.toString()
+			if ("".equals(axsiologisiFormStatus) || axsiologisiFormStatus==null)
+				axsiologisiFormStatus = "Δεν έχει γίνει αξιολόγηση"
+			
+			String axsiologisiNotes = applicationForm.appFormCandidate?.candidateEvaluation?.notes
+			
+			def application
+			applicationForm.appFormApplications.each{
+				if (it?.project?.code?.equals(selectedProject)){
+					application = it
+				}
+			}
+			String axsiologisi2FormStatus = application.applicationEvaluation?.applicationEvalLevel?.toString()
+			if ("".equals(axsiologisi2FormStatus) || axsiologisi2FormStatus==null)
+				axsiologisi2FormStatus = "Δεν έχει γίνει αξιολόγηση"
+			
+			String axsiologisi2Notes = application.applicationEvaluation?.notes
+			
+			Label epipedoStatusLabel = new Label(5, row, epipedoFormStatus)
+			Label axsiologisiStatusLabel = new Label(6, row, axsiologisiFormStatus)
+			Label axsiologisiNotesLabel = new Label(7, row, axsiologisiNotes)
+			Label axsiologisi2StatusLabel = new Label(8, row, axsiologisi2FormStatus)
+			Label axsiologisi2NotesLabel = new Label(9, row, axsiologisi2Notes)
+			
+			Label bioStatusLabel = new Label(10, row, bioStatus)
+			Label appFormStatusLabel = new Label(11, row, appFormStatus)
 			
 			s1.addCell idLabel
 			s1.addCell firstnameLabel
 			s1.addCell lastnameLabel
-			//s1.addCell emailLabel
 			s1.addCell birthLabel
 			s1.addCell cityLabel
-			//s1.addCell countryLabel
-			//s1.addCell dateIssuedLabel
-			//s1.addCell invitationLabel
-			//s1.addCell projectsLabel
+			s1.addCell epipedoStatusLabel
+			s1.addCell axsiologisiStatusLabel
+			s1.addCell axsiologisiNotesLabel
+			s1.addCell axsiologisi2StatusLabel
+			s1.addCell axsiologisi2NotesLabel
 			s1.addCell bioStatusLabel
 			s1.addCell appFormStatusLabel
 			
-			skills.eachWithIndex { obj, i ->
-				if (application.appSkills.contains(obj)){
-					Label skillValueLabel = new Label(7+i, row, "ΝΑΙ")
-					s1.addCell(skillValueLabel)
-				}
-				else {
-					Label skillValueLabel = new Label(7+i, row, "ΌΧΙ")
-					s1.addCell(skillValueLabel)
-				}
-			}
-			wishSkills.eachWithIndex { obj, i ->
-				if (application.appSkills.contains(obj)){
-					Label skillValueLabel = new Label(7+skills.size()+i, row, "ΝΑΙ")
-					s1.addCell(skillValueLabel)
-				}
-				else {
-					Label skillValueLabel = new Label(7+skills.size()+i, row, "ΌΧΙ")
-					s1.addCell(skillValueLabel)
+			applicationForm.appFormApplications.each { 
+				if (it?.project?.code.equals(selectedProject)){
+					skills.eachWithIndex { obj, i ->
+						if (it.applicationSkills.contains(obj)){
+							Label skillValueLabel = new Label(12+i, row, "ΝΑΙ")
+							s1.addCell(skillValueLabel)
+						}
+						else {
+							Label skillValueLabel = new Label(12+i, row, "ΌΧΙ")
+							s1.addCell(skillValueLabel)
+						}
+					}
+					wishSkills.eachWithIndex { obj, i ->
+						if (it.applicationSkills.contains(obj)){
+							Label skillValueLabel = new Label(12+skills.size()+i, row, "ΝΑΙ")
+							s1.addCell(skillValueLabel)
+						}
+						else {
+							Label skillValueLabel = new Label(12+skills.size()+i, row, "ΌΧΙ")
+							s1.addCell(skillValueLabel)
+						}
+					}
 				}
 			}
 			
