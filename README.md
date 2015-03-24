@@ -18,7 +18,7 @@
 </ul>
 Το σύστημα έχει υλοποιηθεί σε γλώσσα Groovy με χρήση του <a href="http://www.grails.org/">Grails framework</a>, και μπορεί να λειτουργήσει εντός οποιουδήποτε servlet container (π.χ. Tomcat) που είναι συμβατός με τα σχετικά διεθνή πρότυπα.
 
-Παρέχεται με την European Union Public License. Περισσότερες πληροφορίες για την άδεια...
+Παρέχεται με την European Union Public License. <a href="https://github.com/EKT/e-applicant/blob/master/docs/LICENSE.txt">Περισσότερες πληροφορίες για την άδεια...</a>
 <hr>
 E-applicant is an Open source applicant tracking system developed by the <a href="http://www.ekt.gr">Hellenic National Documentation Centre (EKT)</a> with the exclusive aim to support the procedures of selecting collaborators for the execution of particular projects. In the frame of EKT's open policy, the system is provided as Free/Libre/Open Source Software for use and extension by any interested parties.
 
@@ -38,4 +38,4 @@ Work in progress (for the near future):
 </ul>
 Developed in Groovy using the <a href="http://www.grails.org/">Grails framework</a>, runs on any standard servlet container (e.g. Tomcat).
 
-Licensing information: European Union Public License, more info.
+Licensing information: European Union Public License, <a href="https://github.com/EKT/e-applicant/blob/master/docs/LICENSE.txt">more info</a>.
